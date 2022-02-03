@@ -9,8 +9,12 @@ ARFLAGS = -crv
 RM = rm
 RMFLAGS = -f
 
-SRCS = ft_printf.c print_format1.c print_format2.c utils.c
+SRCS = ft_printf.c
 OBJS = $(SRCS:.c=.o)
+
+M_DIR = dir_man
+M_SRCS =	dir_mandatory/print_fstring.c\
+			dir_mandatory/skip_fstring.c\
 
 %.o:%.c
 	$(CC) $(CFLAGS) $^
