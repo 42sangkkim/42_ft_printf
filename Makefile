@@ -1,7 +1,7 @@
 NAME := libftprintf.a
 
 CC := gcc
-CFLAGS := -Wall -Wextra -Werror -c
+CFLAGS := -Wall -Wextra -Werror -c -o
 
 AR := ar
 ARFLAGS := -crv
@@ -21,7 +21,7 @@ M_SRCS := \
 TARGET_OBJS := $(C_SRCS:.c=.o) $(M_SRCS:.c=.o)
 
 %.o:%.c
-	$(CC) $(CFLAGS) -o $@ $^
+	$(CC) $(CFLAGS) $@ $^
 
 $(NAME) : $(TARGET_OBJS)
 	$(AR) $(ARFLAGS) $(NAME) $(TARGET_OBJS)

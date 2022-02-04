@@ -1,27 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_printf_bonus.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sangkkim <sangkkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/03 19:30:03 by sangkkim          #+#    #+#             */
-/*   Updated: 2022/02/04 13:29:29 by sangkkim         ###   ########.fr       */
+/*   Created: 2022/02/04 12:58:18 by sangkkim          #+#    #+#             */
+/*   Updated: 2022/02/04 14:09:40 by sangkkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#ifndef FT_PRINTF_BONUS_H
+# define FT_PRINTF_BONUS_H
 
-# include <stdlib.h>
-# include <stdarg.h>
-# include <unistd.h>
+# include "../ft_printf.h"
 
-// for demo version
-# include <string.h>
-# include <strings.h>
-# include <ctype.h>
+typedef struct s_flags
+{
+	int	minus;
+	int	zero;
+	int	precision;
+	int	width;
+	int	sharp;
+	int	space;
+	int	plus;
+}	t_flags;
 
-int	ft_printf(const char *f_string, ...);
+typedef struct s_format
+{
+	t_flags	flags;
+	int		precision;
+	int		width;
+	char	specifier;
+}	t_format;
 
 #endif
