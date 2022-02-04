@@ -9,7 +9,7 @@ ARFLAGS = -crv
 RM = rm
 RMFLAGS = -f
 
-SRCS = ft_printf.c print_format1.c print_format2.c utils.c
+SRCS = ft_printf.c print_format.c utils.c
 OBJS = $(SRCS:.c=.o)
 
 %.o:%.c
