@@ -15,11 +15,7 @@ M_DIR := dir_mandatory
 M_SRCS := \
 	dir_mandatory/print_fstring.c \
 	dir_mandatory/skip_fstring.c \
-	dir_mandatory/put_char.c \
-	dir_mandatory/put_str.c \
-	dir_mandatory/put_addr.c \
-	dir_mandatory/put_deci.c \
-	dir_mandatory/put_hex.c \
+	dir_mandatory/put_formats.c \
 	dir_mandatory/make_digit.c
 
 TARGET_OBJS := $(C_SRCS:.c=.o) $(M_SRCS:.c=.o)
