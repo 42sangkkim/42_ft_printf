@@ -6,7 +6,7 @@
 /*   By: sangkkim <sangkkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 23:13:23 by sangkkim          #+#    #+#             */
-/*   Updated: 2022/02/03 23:14:15 by sangkkim         ###   ########.fr       */
+/*   Updated: 2022/02/04 12:38:11 by sangkkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,8 @@
 
 int	put_str(char *s)
 {
-	return (write(1, s, strlen(s)));
+	if (!s)
+		return (write(1, "(null)", 6));
+	else
+		return (write(1, s, strlen(s)));
 }

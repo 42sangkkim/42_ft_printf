@@ -6,7 +6,7 @@
 /*   By: sangkkim <sangkkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 11:07:46 by sangkkim          #+#    #+#             */
-/*   Updated: 2022/02/04 11:19:41 by sangkkim         ###   ########.fr       */
+/*   Updated: 2022/02/04 12:43:48 by sangkkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,16 @@ void	make_lowerhex(char *buffer, unsigned long value)
 	int			offset;
 	int			div;
 
+	if (!value)
+	{
+		buffer[0] = '0';
+		return ;
+	}
 	offset = 0;
-	div = 8 * 8;
+	div = 16 * 4;
 	while (div)
 	{
-		div -= 8;
+		div -= 4;
 		if (value >> div)
 			buffer[offset++] = hex[(value >> div) % 16];
 	}
@@ -49,11 +54,16 @@ void	make_upperhex(char *buffer, unsigned long value)
 	int			offset;
 	int			div;
 
+	if (!value)
+	{
+		buffer[0] = '0';
+		return ;
+	}
 	offset = 0;
-	div = 8 * 8;
+	div = 16 * 4;
 	while (div)
 	{
-		div -= 8;
+		div -= 4;
 		if (value >> div)
 			buffer[offset++] = hex[(value >> div) % 16];
 	}
