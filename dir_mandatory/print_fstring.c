@@ -6,7 +6,7 @@
 /*   By: sangkkim <sangkkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 20:44:14 by sangkkim          #+#    #+#             */
-/*   Updated: 2022/02/03 23:03:02 by sangkkim         ###   ########.fr       */
+/*   Updated: 2022/02/04 11:28:28 by sangkkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,9 @@ int	print_fstring(const char *f_string, va_list *ap)
 
 int	print_format(const char *f_string, va_list *ap)
 {
-	if (*f_string == 'c')
+	if (!*f_string)
+		return (-1);
+	else if (*f_string == 'c')
 		return (put_char(va_arg(*ap, int)));
 	else if (*f_string == 's')
 		return (put_str(va_arg(*ap, char *)));
@@ -36,9 +38,9 @@ int	print_format(const char *f_string, va_list *ap)
 	else if (*f_string == 'u')
 		return (put_deci(va_arg(*ap, unsigned int)));
 	else if (*f_string == 'x' || *f_string == 'X')
-		return (put_hex(va_arg(*ap, unsigned int)));
+		return (put_hex(va_arg(*ap, unsigned int), *f_string));
 	else
-		return (put_default(*f_string));
+		return (put_char(*f_string));
 }
 
 int	print_string(const char *f_string)
