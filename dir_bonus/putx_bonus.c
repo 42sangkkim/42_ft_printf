@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   putc_bonus.c                                       :+:      :+:    :+:   */
+/*   putx_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sangkkim <sangkkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/04 14:09:06 by sangkkim          #+#    #+#             */
-/*   Updated: 2022/02/06 15:31:23 by sangkkim         ###   ########.fr       */
+/*   Created: 2022/02/05 23:06:43 by sangkkim          #+#    #+#             */
+/*   Updated: 2022/02/05 23:08:06 by sangkkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf_bonus.h"
 
-// puts_bonus.c
-void	puts(t_format format, const char *s);
-
-void	putc(t_format format, int c)
+void	putx(t_format format, unsigned int value)
 {
-	char	buffer[2];
+	char	*buffer;
 
-	buffer[0] = c;
-	buffer[1] = '\0';
-	puts(format, buffer);
+	
 }

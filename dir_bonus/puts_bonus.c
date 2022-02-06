@@ -6,13 +6,13 @@
 /*   By: sangkkim <sangkkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 14:30:35 by sangkkim          #+#    #+#             */
-/*   Updated: 2022/02/05 15:25:52 by sangkkim         ###   ########.fr       */
+/*   Updated: 2022/02/06 15:30:42 by sangkkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf_bonus.h"
 
-void	puts(t_format format, char *s)
+void	puts(t_format format, const char *s)
 {
 	int			slen;
 	char		*buf;
