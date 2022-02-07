@@ -6,7 +6,7 @@
 /*   By: sangkkim <sangkkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 12:58:18 by sangkkim          #+#    #+#             */
-/*   Updated: 2022/02/07 12:07:03 by sangkkim         ###   ########.fr       */
+/*   Updated: 2022/02/07 13:09:57 by sangkkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,8 @@ typedef struct s_format
 			unsigned char	plus : 1;
 		};
 	} flags;
-	struct	s_precision
-	{
-		int		flag;
-		long	value;
-	}	precision;
-	struct s_width
-	{
-		int		flag;
-		long	value;
-	}	width;
+	long	precision;
+	long	width;
 	char	specifier;
 }	t_format;
 
