@@ -6,7 +6,7 @@
 /*   By: sangkkim <sangkkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 15:27:27 by sangkkim          #+#    #+#             */
-/*   Updated: 2022/02/05 21:16:25 by sangkkim         ###   ########.fr       */
+/*   Updated: 2022/02/06 20:41:19 by sangkkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,35 @@
 void	putd(t_format format, int value)
 {
 	char	*buffer;
+	char	prefix;
 
-	buffer = make_abs(value, format.flags.plus, format.flags.space);
+	buffer = prefix_itoa(value, format.flags.plus, format.flags.space);
 	if (buffer && format.flags.precision && format.precision > strlen(buffer))
 		match_precision(&buffer, format.precision);
-	else if (buffer && !format.flags.precision && format.flags.width
-		&& format.flags.zero && format.width > strlen(buffer))
-		match_precision(&buffer, format.width);
 	if (buffer && format.flags.width && format.width > strlen(buffer))
 		match_width(&buffer, format.width, format.flags.minus);
 	//print_buffer(buffer);
 	free(buffer);
 }
 
-const char	*make_abs(int value, int space, int plus)
+const char	*prefix_itoa(int value, int space, int plus)
 {
+	char	*buffer;
+	int		offset;
+
+	buffer = calloc(12, sizeof(char));
+	offset = 0;
 	if (value < 0)
-		return (itoa(-value));
+		buffer[offset++] = '-';
+	else if (plus)
+		buffer[offset++] = '+';
+	else if (space)
+		buffer[offset++] = ' ';
+	if (value < 0)
+		make_uint(buffer + offset, -value);
 	else
-		return (itoa(value));
+		make_uint(buffer + offset, value);
+	return (buffer);
 }
 
 const void	match_precision(char **buffer, int precision)

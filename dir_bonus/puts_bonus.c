@@ -6,7 +6,7 @@
 /*   By: sangkkim <sangkkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 14:30:35 by sangkkim          #+#    #+#             */
-/*   Updated: 2022/02/06 15:30:42 by sangkkim         ###   ########.fr       */
+/*   Updated: 2022/02/06 19:18:18 by sangkkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	puts(t_format format, const char *s)
 		match_precision(buf, format.precision);
 	if (buf && format.flags.width && format.width > strlen(buf))
 		match_width(buf, format.width, format.flags.minus);
-	//print_buf(buf);
+	// print_buf(buf);
 	free(buf);
 }
 
