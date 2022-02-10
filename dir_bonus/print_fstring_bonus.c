@@ -6,14 +6,13 @@
 /*   By: sangkkim <sangkkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 13:30:22 by sangkkim          #+#    #+#             */
-/*   Updated: 2022/02/09 10:51:29 by sangkkim         ###   ########.fr       */
+/*   Updated: 2022/02/09 13:53:03 by sangkkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf_bonus.h"
 
 void		print_format(const char **f_string, va_list *ap);
-void		print_string(const char **f_string);
 int			is_valid(t_format format);
 
 t_format	get_format(const char *f_string);
@@ -44,14 +43,4 @@ void	print_format(const char **f_string, va_list *ap)
 	if (!is_valid_format(format))
 		return (0);
 	put_format(format, ap);
-}
-
-void	print_string(const char **f_string)
-{
-	char	*start;
-
-	start = *f_string;
-	while (**f_string && **f_string != '%')
-		*f_string += 1;
-	return (write(1, start, f_string - start));
 }
