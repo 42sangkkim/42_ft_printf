@@ -6,11 +6,10 @@
 /*   By: sangkkim <sangkkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 11:29:14 by sangkkim          #+#    #+#             */
-/*   Updated: 2022/02/10 12:08:35 by sangkkim         ###   ########.fr       */
+/*   Updated: 2022/02/10 12:21:09 by sangkkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/format.h"
 #include "../ft_printf.h"
 
 char	*make_c_buffer(t_format format, unsigned char c);

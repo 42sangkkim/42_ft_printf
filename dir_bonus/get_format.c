@@ -6,11 +6,10 @@
 /*   By: sangkkim <sangkkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 20:50:08 by sangkkim          #+#    #+#             */
-/*   Updated: 2022/02/10 12:06:31 by sangkkim         ###   ########.fr       */
+/*   Updated: 2022/02/10 12:21:06 by sangkkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/format.h"
 #include "../ft_printf.h"
 
 void	set_flags(const char **f_string, t_format *format);
