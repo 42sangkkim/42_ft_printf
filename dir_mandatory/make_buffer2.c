@@ -6,14 +6,18 @@
 /*   By: sangkkim <sangkkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 11:44:42 by sangkkim          #+#    #+#             */
-/*   Updated: 2022/02/10 12:09:15 by sangkkim         ###   ########.fr       */
+/*   Updated: 2022/02/10 12:15:32 by sangkkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/format.h"
 #include "../ft_printf.h"
 
-char	*make_u_buffer(t_format format, unsigned int u)
+void	make_hex(char *buffer, unsigned long value);
+void	make_lhex(char *buffer, unsigned long value);
+void	make_uint(char *buffer, unsigned int value);
+
+char	*make_u_buffer(unsigned int u)
 {
 	char	*buffer;
 

@@ -6,19 +6,19 @@
 /*   By: sangkkim <sangkkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 11:29:14 by sangkkim          #+#    #+#             */
-/*   Updated: 2022/02/10 12:08:35 by sangkkim         ###   ########.fr       */
+/*   Updated: 2022/02/10 12:13:51 by sangkkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/format.h"
 #include "../ft_printf.h"
 
-char	*make_c_buffer(t_format format, unsigned char c);
-char	*make_s_buffer(t_format format, char *s);
-char	*make_p_buffer(t_format format, void *p);
-char	*make_d_buffer(t_format format, int d);
+char	*make_c_buffer(unsigned char c);
+char	*make_s_buffer(char *s);
+char	*make_p_buffer(void *p);
+char	*make_d_buffer(int d);
 
-char	*make_u_buffer(t_format format, unsigned int u);
+char	*make_u_buffer(unsigned int u);
 char	*make_x_buffer(t_format format, unsigned int x);
 void	make_hex(char *buffer, unsigned long value);
 void	make_lhex(char *buffer, unsigned long value);
@@ -27,23 +27,23 @@ void	make_uint(char *buffer, unsigned int value);
 char	*make_buffer(t_format format, va_list *ap)
 {
 	if (format.specifier == 'c')
-		return (make_c_buffer(format, va_arg(*ap, int)));
+		return (make_c_buffer(va_arg(*ap, int)));
 	if (format.specifier == 's')
-		return (make_s_buffer(format, va_arg(*ap, char *)));
+		return (make_s_buffer(va_arg(*ap, char *)));
 	if (format.specifier == 'p')
-		return (make_p_buffer(format, va_arg(*ap, void *)));
+		return (make_p_buffer(va_arg(*ap, void *)));
 	if (format.specifier == 'd' || format.specifier == 'i')
-		return (make_d_buffer(format, va_arg(*ap, int)));
+		return (make_d_buffer(va_arg(*ap, int)));
 	if (format.specifier == 'u')
-		return (make_u_buffer(format, va_arg(*ap, unsigned int)));
+		return (make_u_buffer(va_arg(*ap, unsigned int)));
 	if (format.specifier == 'x' || format.specifier == 'X')
 		return (make_x_buffer(format, va_arg(*ap, unsigned int)));
 	if (format.specifier == '%')
-		return (make_c_buffer(format, '%'));
+		return (make_c_buffer('%'));
 	return (NULL);
 }
 
-char	*make_c_buffer(t_format format, unsigned char c)
+char	*make_c_buffer(unsigned char c)
 {
 	char	*buffer;
 
@@ -53,12 +53,12 @@ char	*make_c_buffer(t_format format, unsigned char c)
 	return (buffer);
 }
 
-char	*make_s_buffer(t_format format, char *s)
+char	*make_s_buffer(char *s)
 {
 	return (strdup(s));
 }
 
-char	*make_p_buffer(t_format format, void *p)
+char	*make_p_buffer(void *p)
 {
 	char	*buffer;
 
@@ -72,7 +72,7 @@ char	*make_p_buffer(t_format format, void *p)
 	return (buffer);
 }
 
-char	*make_d_buffer(t_format format, int d)
+char	*make_d_buffer(int d)
 {
 	char	*buffer;
 
