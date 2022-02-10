@@ -6,12 +6,16 @@
 /*   By: sangkkim <sangkkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 20:50:08 by sangkkim          #+#    #+#             */
-/*   Updated: 2022/02/09 21:22:12 by sangkkim         ###   ########.fr       */
+/*   Updated: 2022/02/10 12:06:31 by sangkkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/format.h"
 #include "../ft_printf.h"
+
+void	set_flags(const char **f_string, t_format *format);
+void	set_width(const char **f_string, t_format *format);
+void	set_precision(const char **f_string, t_format *format);
 
 t_format	get_format(const char **f_string)
 {

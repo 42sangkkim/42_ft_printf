@@ -6,7 +6,7 @@
 /*   By: sangkkim <sangkkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 21:24:42 by sangkkim          #+#    #+#             */
-/*   Updated: 2022/02/10 11:24:17 by sangkkim         ###   ########.fr       */
+/*   Updated: 2022/02/10 12:06:58 by sangkkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 #include "../includes/format.h"
 
 #define INT_MAX 0x7FFFFFFF
+
+int	valid_specifier(char specifier);
+int	valid_flags(char specifier, t_flags flags);
+int	valid_width_precision(long width, long precision);
 
 int	check_format(t_format format)
 {

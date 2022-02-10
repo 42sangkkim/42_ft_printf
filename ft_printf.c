@@ -6,7 +6,7 @@
 /*   By: sangkkim <sangkkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 19:28:56 by sangkkim          #+#    #+#             */
-/*   Updated: 2022/02/09 20:49:30 by sangkkim         ###   ########.fr       */
+/*   Updated: 2022/02/10 12:10:25 by sangkkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,17 @@
 
 #include "ft_printf.h"
 
-void	print_format(const char **f_string, va_list *ap);
+// ft_printf.c [this]
+char		*get_format_buffer(const char **f_string, va_list *ap);
+char		*get_string_buffer(const char **f_string);
+int			va_exit(va_list *ap, int exit_code);
+
+// get_format.c
+t_format	get_format(const char **f_string);
+// check_format.c
+int			check_format(t_format format);
+// make_buffer.c
+char		*make_buffer(t_format format, va_list *ap);
 
 int	ft_printf(const char *f_string, ...)
 {
@@ -42,7 +52,7 @@ int	ft_printf(const char *f_string, ...)
 			return (va_exit(&ap, -1));
 		print_len += temp_len;
 	}
-	va_exit(&ap, print_len);
+	return (va_exit(&ap, print_len));
 }
 
 char	*get_format_buffer(const char **f_string, va_list *ap)
@@ -57,7 +67,7 @@ char	*get_format_buffer(const char **f_string, va_list *ap)
 	return (buffer);
 }
 
-char	*get_stirng_buffer(const char **f_string)
+char	*get_string_buffer(const char **f_string)
 {
 	char	*start;
 	char	*buffer;

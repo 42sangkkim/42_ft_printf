@@ -11,12 +11,12 @@ RMFLAGS := -f
 
 C_SRCS := ft_printf.c
 
-M_DIR := dir_mandatory
+M_DIR := ./dir_mandatory
 M_SRCS := \
-	dir_mandatory/print_fstring.c \
-	dir_mandatory/skip_fstring.c \
-	dir_mandatory/put_formats.c \
-	dir_mandatory/make_digit.c
+	$(M_DIR)/get_format.c \
+	$(M_DIR)/check_format.c \
+	$(M_DIR)/make_buffer.c \
+	$(M_DIR)/make_buffer2.c
 
 TARGET_OBJS := $(C_SRCS:.c=.o) $(M_SRCS:.c=.o)
 
