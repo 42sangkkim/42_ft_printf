@@ -6,11 +6,10 @@
 /*   By: sangkkim <sangkkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 11:44:42 by sangkkim          #+#    #+#             */
-/*   Updated: 2022/02/10 12:15:32 by sangkkim         ###   ########.fr       */
+/*   Updated: 2022/02/10 12:19:41 by sangkkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/format.h"
 #include "../ft_printf.h"
 
 void	make_hex(char *buffer, unsigned long value);

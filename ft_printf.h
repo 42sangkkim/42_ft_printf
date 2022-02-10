@@ -23,6 +23,29 @@
 # include <ctype.h>
 # include <inttypes.h>
 
+typedef union u_flags
+{
+	unsigned char	byte;
+	struct
+	{
+		unsigned char	minus : 1;
+		unsigned char	zero : 1;
+		unsigned char	precision : 1;
+		unsigned char	width : 1;
+		unsigned char	sharp : 1;
+		unsigned char	space : 1;
+		unsigned char	plus : 1;
+	};
+}	t_flags;
+
+typedef struct s_format
+{
+	t_flags	flags;
+	long	precisoin;
+	long	width;
+	char	specifier;
+}	t_format;
+
 int	ft_printf(const char *f_string, ...);
 
 #endif
