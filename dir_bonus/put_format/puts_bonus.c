@@ -6,36 +6,37 @@
 /*   By: sangkkim <sangkkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/05 14:30:35 by sangkkim          #+#    #+#             */
-/*   Updated: 2022/02/09 10:19:24 by sangkkim         ###   ########.fr       */
+/*   Updated: 2022/02/11 13:28:47 by sangkkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf_bonus.h"
+#include "../../ft_printf.h"
 
-void	puts(t_format format, const char *s)
+int	puts(t_format format, const char *s)
 {
-	int			slen;
-	char		*buf;
+	int			print_len;
+	char		*buffer;
 
-	buf = copy_s(s);
-	if (buf && format.flags.precision && format.precision < strlen(buf))
-		match_precision(buf, format.precision);
-	if (buf && format.flags.width && format.width > strlen(buf))
-		match_width(buf, format.width, format.flags.minus);
-	// put_buffer(buf);
-	free(buf);
+	buffer = make_s(s);
+	if (buffer && format.flags.precision && format.precision < strlen(buffer))
+		match_precision(buffer, format.precision);
+	if (buffer && format.flags.width && format.width > strlen(buffer))
+		match_width(buffer, format.width, format.flags.minus);
+	if (!buffer)
+		return (-1);
+	print_len = write(1, buffer, strlen(buffer));
+	free(buffer);
+	return (print_len);
 }
 
-char	*copy_s(const char *s)
+char	*make_s(const char *s)
 {
 	const char	*null_s = "(null)";
-	char		*copy;
 
 	if (!s)
-		copy = strdup(null_s);
+		return (strdup(null_s));
 	else
-		copy = strdup(s);
-	return (copy);
+		return (strdup(s));
 }
 
 void	match_precision(char **buf, int precision)
@@ -43,7 +44,7 @@ void	match_precision(char **buf, int precision)
 	(*buf)[precision] = '\0';
 }
 
-void	match_width(char **buf, int width, int align)
+void	match_width(char **buf, int width, int minus)
 {
 	char	*new_buf;
 	int		string_len;
@@ -54,7 +55,7 @@ void	match_width(char **buf, int width, int align)
 		return (NULL);
 	string_len = strlen(*buf);
 	space_len = width - string_len;
-	if (align)
+	if (minus)
 	{
 		strcat(new_buf, *buf);
 		memset(new_buf + string_len, ' ', space_len);

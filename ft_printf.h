@@ -6,7 +6,7 @@
 /*   By: sangkkim <sangkkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 19:30:03 by sangkkim          #+#    #+#             */
-/*   Updated: 2022/02/10 12:02:33 by sangkkim         ###   ########.fr       */
+/*   Updated: 2022/02/11 13:24:14 by sangkkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ typedef union u_flags
 typedef struct s_format
 {
 	t_flags	flags;
-	long	precisoin;
+	long	precision;
 	long	width;
 	char	specifier;
 }	t_format;

@@ -6,7 +6,7 @@
 /*   By: sangkkim <sangkkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 19:28:56 by sangkkim          #+#    #+#             */
-/*   Updated: 2022/02/11 11:17:01 by sangkkim         ###   ########.fr       */
+/*   Updated: 2022/02/11 13:15:29 by sangkkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	print_string(const char **f_string)
 	start = (char *)(*f_string);
 	while (**f_string && **f_string != '%')
 		*f_string += 1;
-	return ((int)write(1, start, *f_string - start));
+	return (write(1, start, *f_string - start));
 }
 
 int	va_exit(va_list *ap, int exit_code)

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_format.c                                       :+:      :+:    :+:   */
+/*   get_format_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sangkkim <sangkkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 20:50:08 by sangkkim          #+#    #+#             */
-/*   Updated: 2022/02/10 12:21:06 by sangkkim         ###   ########.fr       */
+/*   Updated: 2022/02/11 13:30:01 by sangkkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	set_precision(const char **f_string, t_format *format)
 {
 	format->flags.precision = 1;
 	*f_string += 1;
-	format->precisoin = strtol(*f_string, NULL, 10);
+	format->precision = strtol(*f_string, NULL, 10);
 	while (isdigit(**f_string))
 		*f_string += 1;
 }

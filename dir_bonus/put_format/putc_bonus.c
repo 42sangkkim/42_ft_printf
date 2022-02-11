@@ -6,20 +6,40 @@
 /*   By: sangkkim <sangkkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 14:09:06 by sangkkim          #+#    #+#             */
-/*   Updated: 2022/02/06 15:31:23 by sangkkim         ###   ########.fr       */
+/*   Updated: 2022/02/11 13:21:25 by sangkkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf_bonus.h"
+#include "../../ft_printf.h"
 
-// puts_bonus.c
-void	puts(t_format format, const char *s);
+static char	*match_width(int width, unsigned char c, int minus);
 
-void	putc(t_format format, int c)
+int	putc(t_format format, unsigned char c)
 {
-	char	buffer[2];
+	char	*buffer;
 
-	buffer[0] = c;
-	buffer[1] = '\0';
-	puts(format, buffer);
+	if (format.flags.width && format.width > 1)
+	{
+		buffer = match_width(format.width, c, format.flags.minus);
+		if (!buffer)
+			reutrn (-1);
+		return (write(1, buffer, format.width));
+	}
+	else
+		return (write(1, &c, 1));
+}
+
+static char	*match_width(int width, unsigned char c, int minus)
+{
+	char	*buffer;
+
+	buffer = calloc(width, sizeof(char));
+	if (!buffer)
+		return (NULL);
+	memset(buffer, ' ', width);
+	if (minus)
+		buffer[0] = 'c';
+	else
+		buffer[width - 1] = 'c';
+	return (buffer);
 }

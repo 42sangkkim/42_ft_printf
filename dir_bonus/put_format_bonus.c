@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   make_buffer.c                                      :+:      :+:    :+:   */
+/*   put_format_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sangkkim <sangkkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 11:29:14 by sangkkim          #+#    #+#             */
-/*   Updated: 2022/02/11 11:43:39 by sangkkim         ###   ########.fr       */
+/*   Updated: 2022/02/11 13:29:53 by sangkkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	put_format(t_format format, va_list *ap)
 	if (format.specifier == 'x' || format.specifier == 'X')
 		return (putx(format, va_arg(*ap, unsigned int)));
 	if (format.specifier == '%')
-		return (putc('%'));
+		return (putpc('%'));
 	return (-1);
 }
 
@@ -59,32 +59,40 @@ int	puts(char *s)
 
 int	putp(void *p)
 {
-	char	buffer[19];
+	char	*buffer;
 	int		print_len;
 
-	bzero(buffer, 19);
-	buffer[0] = '0';
-	buffer[1] = 'x';
-	make_hex(buffer + 2, (unsigned long)p);
+	buffer = calloc(19, sizeof(char));
+	if (buffer)
+	{
+		buffer[0] = '0';
+		buffer[1] = 'x';
+		make_hex(buffer + 2, (unsigned long)p);
+	}
 	print_len = write(1, buffer, strlen(buffer));
+	free(buffer);
 	return (print_len);
 }
 
 int	putd(int d)
 {
-	char	buffer[12];
+	char	*buffer;
 	int		print_len;
 
-	bzero(buffer, 12);
-	if (d < 0)
+	buffer = calloc(12, sizeof(char));
+	if (buffer)
 	{
-		buffer[0] = '-';
-		make_uint(buffer + 1, -d);
-	}
-	else
-	{
-		make_uint(buffer, d);
+		if (d < 0)
+		{
+			buffer[0] = '-';
+			make_uint(buffer + 1, -d);
+		}
+		else
+		{
+			make_uint(buffer, d);
+		}
 	}
 	print_len = write(1, buffer, strlen(buffer));
+	free(buffer);
 	return (print_len);
 }

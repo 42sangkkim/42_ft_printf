@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_format.c                                     :+:      :+:    :+:   */
+/*   check_format_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sangkkim <sangkkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 21:24:42 by sangkkim          #+#    #+#             */
-/*   Updated: 2022/02/10 12:21:18 by sangkkim         ###   ########.fr       */
+/*   Updated: 2022/02/11 13:30:12 by sangkkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	check_format(t_format format)
 		return (0);
 	else if (!valid_flags(format.specifier, format.flags))
 		return (0);
-	else if (!valid_width_precision(format.width, format.precisoin))
+	else if (!valid_width_precision(format.width, format.precision))
 		return (0);
 	else
 		return (1);
