@@ -6,7 +6,7 @@
 /*   By: sangkkim <sangkkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 11:44:42 by sangkkim          #+#    #+#             */
-/*   Updated: 2022/02/11 11:43:27 by sangkkim         ###   ########.fr       */
+/*   Updated: 2022/02/11 11:32:37 by sangkkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,26 +18,34 @@ void	make_uint(char *buffer, unsigned int value);
 
 int	putu(unsigned int u)
 {
-	char	buffer[11];
+	char	*buffer;
 	int		print_len;
 
-	bzero(buffer, 11);
-	make_uint(buffer, u);
+	buffer = calloc(11, sizeof(char));
+	if (buffer)
+	{
+		make_uint(buffer, u);
+	}
 	print_len = write(1, buffer, strlen(buffer));
+	free(buffer);
 	return (print_len);
 }
 
 int	putx(t_format format, unsigned int x)
 {
-	char	buffer[9];
+	char	*buffer;
 	int		print_len;
 
-	bzero(buffer, 9);
-	if (format.specifier == 'x')
-		make_hex(buffer, x);
-	else
-		make_lhex(buffer, x);
+	buffer = calloc(9, sizeof(char));
+	if (buffer)
+	{
+		if (format.specifier == 'x')
+			make_hex(buffer, x);
+		else
+			make_lhex(buffer, x);
+	}
 	print_len = write(1, buffer, strlen(buffer));
+	free(buffer);
 	return (print_len);
 }
 
