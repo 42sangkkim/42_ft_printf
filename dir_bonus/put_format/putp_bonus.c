@@ -6,41 +6,40 @@
 /*   By: sangkkim <sangkkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/06 11:48:16 by sangkkim          #+#    #+#             */
-/*   Updated: 2022/02/06 20:50:18 by sangkkim         ###   ########.fr       */
+/*   Updated: 2022/02/11 19:26:40 by sangkkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf_bonus.h"
+#include "../../ft_printf.h"
 
-// puts_bonus.c
-void	puts(t_format format, const char *s);
-
-void	make_addr(char *buf, unsigned long value);
+char	*make_p(unsigned long value);
+char	*match_width(char *buffer, int width, t_flags flags);
 
 void	putp(t_format format, void *p)
 {
-	char	buffer[20];
+	int		print_len;
+	char	*buffer;
 
-	bzero(buffer, 20);
-	strcat(buffer, "0x");
-	make_addr(buffer, (unsigned long)p);
-	puts(format, buffer);
+	buffer = make_p((unsigned long)p);
+	if (buffer && format.flags.width && format.width > strlen(buffer))
+		buffer = match_width(buffer, format.width, format.flags);
+	if (!buffer)
+		return (-1);
+	print_len = write(1, buffer, strlen(buffer));
+	free(buffer);
+	return (print_len);
 }
 
-void	make_addr(char *buf, unsigned long value)
+char	*make_p(unsigned long value)
 {
-	const char		*hex = "0123456789abcdef";
-	int				offset;
-	unsigned long	div;
+	char	*buffer;
 
-	if (!value)
-		buf[0] = '0';
-	offset = 0;
-	div = 0x1000000000000000;
-	while (div)
+	buffer = calloc(19, sizeof(char));
+	if (buffer)
 	{
-		if (value / div)
-			buf[offset++] = hex[value / div % 16];
-		div /= 16;
+		buffer[0] = '0';
+		buffer[1] = 'x';
+		build_hex(buffer + 2, value);
 	}
+	return (buffer);
 }
