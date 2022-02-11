@@ -6,60 +6,61 @@
 /*   By: sangkkim <sangkkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 11:29:14 by sangkkim          #+#    #+#             */
-/*   Updated: 2022/02/10 12:19:38 by sangkkim         ###   ########.fr       */
+/*   Updated: 2022/02/11 11:32:51 by sangkkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_printf.h"
 
-char	*make_c_buffer(unsigned char c);
-char	*make_s_buffer(char *s);
-char	*make_p_buffer(void *p);
-char	*make_d_buffer(int d);
+int		putc(unsigned char c);
+int		puts(char *s);
+int		putp(void *p);
+int		putd(int d);
 
-char	*make_u_buffer(unsigned int u);
-char	*make_x_buffer(t_format format, unsigned int x);
+int		putu(unsigned int u);
+int		putx(t_format format, unsigned int x);
 void	make_hex(char *buffer, unsigned long value);
 void	make_lhex(char *buffer, unsigned long value);
 void	make_uint(char *buffer, unsigned int value);
 
-char	*make_buffer(t_format format, va_list *ap)
+int	put_format(t_format format, va_list *ap)
 {
 	if (format.specifier == 'c')
-		return (make_c_buffer(va_arg(*ap, int)));
+		return (putc(va_arg(*ap, int)));
 	if (format.specifier == 's')
-		return (make_s_buffer(va_arg(*ap, char *)));
+		return (puts(va_arg(*ap, char *)));
 	if (format.specifier == 'p')
-		return (make_p_buffer(va_arg(*ap, void *)));
+		return (putp(va_arg(*ap, void *)));
 	if (format.specifier == 'd' || format.specifier == 'i')
-		return (make_d_buffer(va_arg(*ap, int)));
+		return (putd(va_arg(*ap, int)));
 	if (format.specifier == 'u')
-		return (make_u_buffer(va_arg(*ap, unsigned int)));
+		return (putu(va_arg(*ap, unsigned int)));
 	if (format.specifier == 'x' || format.specifier == 'X')
-		return (make_x_buffer(format, va_arg(*ap, unsigned int)));
+		return (putx(format, va_arg(*ap, unsigned int)));
 	if (format.specifier == '%')
-		return (make_c_buffer('%'));
-	return (NULL);
+		return (putc('%'));
+	return (-1);
 }
 
-char	*make_c_buffer(unsigned char c)
+int	putc(unsigned char c)
+{
+	return (write(1, &c, 1));
+}
+
+int	puts(char *s)
+{
+	const char	*null_str = "(null)";
+
+	if (!s)
+		return ((int)write(1, null_str, 6));
+	else
+		return ((int)write(1, s, strlen(s)));
+}
+
+int	putp(void *p)
 {
 	char	*buffer;
-
-	buffer = calloc(2, sizeof(char));
-	if (buffer)
-		buffer[0] = c;
-	return (buffer);
-}
-
-char	*make_s_buffer(char *s)
-{
-	return (strdup(s));
-}
-
-char	*make_p_buffer(void *p)
-{
-	char	*buffer;
+	int		print_len;
 
 	buffer = calloc(19, sizeof(char));
 	if (buffer)
@@ -68,12 +69,15 @@ char	*make_p_buffer(void *p)
 		buffer[1] = 'x';
 		make_hex(buffer + 2, (unsigned long)p);
 	}
-	return (buffer);
+	print_len = write(1, buffer, strlen(buffer));
+	free(buffer);
+	return (print_len);
 }
 
-char	*make_d_buffer(int d)
+int	putd(int d)
 {
 	char	*buffer;
+	int		print_len;
 
 	buffer = calloc(12, sizeof(char));
 	if (buffer)
@@ -88,5 +92,7 @@ char	*make_d_buffer(int d)
 			make_uint(buffer, d);
 		}
 	}
-	return (buffer);
+	print_len = write(1, buffer, strlen(buffer));
+	free(buffer);
+	return (print_len);
 }

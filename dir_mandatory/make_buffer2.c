@@ -6,7 +6,7 @@
 /*   By: sangkkim <sangkkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 11:44:42 by sangkkim          #+#    #+#             */
-/*   Updated: 2022/02/10 12:19:41 by sangkkim         ###   ########.fr       */
+/*   Updated: 2022/02/11 11:32:37 by sangkkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,25 @@ void	make_hex(char *buffer, unsigned long value);
 void	make_lhex(char *buffer, unsigned long value);
 void	make_uint(char *buffer, unsigned int value);
 
-char	*make_u_buffer(unsigned int u)
+int	putu(unsigned int u)
 {
 	char	*buffer;
+	int		print_len;
 
 	buffer = calloc(11, sizeof(char));
 	if (buffer)
 	{
 		make_uint(buffer, u);
 	}
-	return (buffer);
+	print_len = write(1, buffer, strlen(buffer));
+	free(buffer);
+	return (print_len);
 }
 
-char	*make_x_buffer(t_format format, unsigned int x)
+int	putx(t_format format, unsigned int x)
 {
 	char	*buffer;
+	int		print_len;
 
 	buffer = calloc(9, sizeof(char));
 	if (buffer)
@@ -40,7 +44,9 @@ char	*make_x_buffer(t_format format, unsigned int x)
 		else
 			make_lhex(buffer, x);
 	}
-	return (buffer);
+	print_len = write(1, buffer, strlen(buffer));
+	free(buffer);
+	return (print_len);
 }
 
 void	make_hex(char *buffer, unsigned long value)
@@ -50,7 +56,7 @@ void	make_hex(char *buffer, unsigned long value)
 	unsigned long	div;
 
 	offset = 0;
-	div = 0x0100000000000000;
+	div = 0x1000000000000000;
 	while (div)
 	{
 		if (value / div)
@@ -68,7 +74,7 @@ void	make_lhex(char *buffer, unsigned long value)
 	unsigned long	div;
 
 	offset = 0;
-	div = 0x0100000000000000;
+	div = 0x1000000000000000;
 	while (div)
 	{
 		if (value / div)

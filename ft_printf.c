@@ -6,20 +6,19 @@
 /*   By: sangkkim <sangkkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 19:28:56 by sangkkim          #+#    #+#             */
-/*   Updated: 2022/02/10 12:10:25 by sangkkim         ###   ########.fr       */
+/*   Updated: 2022/02/11 11:17:01 by sangkkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <stdarg.h>
 #include <unistd.h>
-#include "includes/format.h"
 
 #include "ft_printf.h"
 
 // ft_printf.c [this]
-char		*get_format_buffer(const char **f_string, va_list *ap);
-char		*get_string_buffer(const char **f_string);
+int			print_format(const char **f_string, va_list *ap);
+int			print_string(const char **f_string);
 int			va_exit(va_list *ap, int exit_code);
 
 // get_format.c
@@ -27,11 +26,10 @@ t_format	get_format(const char **f_string);
 // check_format.c
 int			check_format(t_format format);
 // make_buffer.c
-char		*make_buffer(t_format format, va_list *ap);
+int			put_format(t_format format, va_list *ap);
 
 int	ft_printf(const char *f_string, ...)
 {
-	char	*buffer;
 	int		temp_len;
 	int		print_len;
 	va_list	ap;
@@ -41,13 +39,9 @@ int	ft_printf(const char *f_string, ...)
 	while (*f_string)
 	{
 		if (*f_string == '%')
-			buffer = get_format_buffer(&f_string, &ap);
+			temp_len = print_format(&f_string, &ap);
 		else
-			buffer = get_string_buffer(&f_string);
-		if (!buffer)
-			return (va_exit(&ap, -1));
-		temp_len = write(1, buffer, strlen(buffer));
-		free(buffer);
+			temp_len = print_string(&f_string);
 		if (temp_len < 0)
 			return (va_exit(&ap, -1));
 		print_len += temp_len;
@@ -55,28 +49,24 @@ int	ft_printf(const char *f_string, ...)
 	return (va_exit(&ap, print_len));
 }
 
-char	*get_format_buffer(const char **f_string, va_list *ap)
+int	print_format(const char **f_string, va_list *ap)
 {
 	t_format	format;
-	char		*buffer;
 
 	format = get_format(f_string);
 	if (!check_format(format))
-		return (NULL);
-	buffer = make_buffer(format, ap);
-	return (buffer);
+		return (-1);
+	return (put_format(format, ap));
 }
 
-char	*get_string_buffer(const char **f_string)
+int	print_string(const char **f_string)
 {
 	char	*start;
-	char	*buffer;
 
 	start = (char *)(*f_string);
 	while (**f_string && **f_string != '%')
 		*f_string += 1;
-	buffer = strndup(start, *f_string - start);
-	return (buffer);
+	return ((int)write(1, start, *f_string - start));
 }
 
 int	va_exit(va_list *ap, int exit_code)
