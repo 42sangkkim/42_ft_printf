@@ -10,13 +10,14 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 make: *** No rule to make target `all'.  Stop.
 
 
-# Make data base, printed on Sun Jul 10 21:16:52 2022
+# Make data base, printed on Sun Jul 10 22:07:54 2022
 
 # Variables
 
 # automatic
 <D = $(patsubst %/,%,$(dir $<))
 # automatic
+ 
 ?F = $(notdir $?)
 # environment
 ELECTRON_NO_ATTACH_CONSOLE = 1
@@ -77,7 +78,7 @@ VSCODE_CODE_CACHE_PATH = /Users/sangkkim/Library/Application Support/Code/Cached
 # environment
 LOGNAME = sangkkim
 # environment
-APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
 # environment
 VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # automatic
@@ -97,7 +98,6 @@ MAKE_VERSION := 3.81
 # environment
 USER = sangkkim
 # makefile
- 
 .DEFAULT_GOAL := 
 # default
 MAKECMDGOALS := all
@@ -122,6 +122,7 @@ MAKEFLAGS = Rrqp
 # environment
 MFLAGS = -Rrqp
 # automatic
+ 
 *D = $(patsubst %/,%,$(dir $*))
 # environment
 TERM_PROGRAM_VERSION = 3.4.16
@@ -213,6 +214,7 @@ Makefile:
 makefile:
 #  A default, MAKEFILES, or -include/sinclude makefile.
 #  Implicit rule search has been done.
+ 
 #  File does not exist.
 #  File has been updated.
 #  Failed to be updated.
@@ -248,6 +250,6 @@ GNUmakefile:
 # strcache size: total = 0 / max = 0 / min = 4096 / avg = 0
 # strcache free: total = 0 / max = 0 / min = 4096 / avg = 0
 
-# Finished Make data base on Sun Jul 10 21:16:52 2022
+# Finished Make data base on Sun Jul 10 22:07:54 2022
 
  

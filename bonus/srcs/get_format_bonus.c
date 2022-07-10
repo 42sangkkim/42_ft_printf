@@ -6,76 +6,83 @@
 /*   By: sangkkim <sangkkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 00:45:55 by sangkkim          #+#    #+#             */
-/*   Updated: 2022/07/10 01:20:45 by sangkkim         ###   ########.fr       */
+/*   Updated: 2022/07/11 00:30:55 by sangkkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "limits.h"
 #include "format_bonus.h"
 
-int		set_flags(t_format *format, char c);
-int		set_precision(t_format *format, const char *s);
-int		set_width(t_format *format, const char *s);
+#include <unistd.h>
 
-int	get_format(t_format *format, const char *str)
+static void	set_flags(t_format *format, char c);
+static void	set_precision(t_format *format, char **s);
+static void	set_width(t_format *format, char **s);
+
+void	get_format(t_format *format, char **str)
 {
-	int	len;
-
 	ft_bzero(format, sizeof(t_format));
-	len = 1;
-	while (str[len])
+	*str += 1;
+	while (**str)
 	{
-		if (ft_strchr("-0# +", str[len]))
-			len += set_flags(format, str[len]);
-		else if (str[len] == '.')
-			len += set_precision(format, str);
-		else if (ft_isdigit(str[len]))
-			len += set_width(format, str);
+		if (ft_strchr("-0# +", **str))
+			set_flags(format, *(*str++));
+		else if (**str == '.')
+			set_precision(format, str);
+		else if (ft_isdigit(**str))
+			set_width(format, str);
 		else
 		{
-			format->specifier = str[len++];
+			format->specifier = *(*str);
 			break ;
 		}
-		str++;
 	}
-	return (len);
+	if (**str)
+		*str += 1;
 }
 
-int	set_flags(t_format *format, char c)
+static void	set_flags(t_format *format, char c)
 {
 	if (c == '-')
-		format->flags.minus = 1;
+		format->f_minus = 1;
 	else if (c == '0')
-		format->flags.zero = 1;
+		format->f_zero = 1;
 	else if (c == '#')
-		format->flags.hash = 1;
+		format->f_hash = 1;
 	else if (c == ' ')
-		format->flags.space = 1;
+		format->f_space = 1;
 	else if (c == '+')
-		format->flags.plus = 1;
-	return (1);
+		format->f_plus = 1;
 }
 
-int	set_precision(t_format *format, const char *s)
+static void	set_precision(t_format *format, char **s)
 {
-	int	len;
+	size_t	value;
 
-	format->flags.precision = 1;
-	len = 1;
-	while (ft_isdigit(s[len]))
-		len++;
-	format->precision = ft_atoi(s + 1);
-	return (len);
+	format->f_precision = 1;
+	*s += 1;
+	value = 0;
+	while (ft_isdigit(**s))
+	{
+		if (value < INT_MAX)
+			value = value * 10 + **s - '0';
+		*s += 1;
+	}
+	format->precision = value;
 }
 
-int	set_width(t_format *format, const char *s)
+static void	set_width(t_format *format, char **s)
 {
-	int	len;
+	size_t	value;
 
-	format->flags.width = 1;
-	len = 0;
-	while (ft_isdigit(s[len]))
-		len++;
-	format->width = ft_atoi(s);
-	return (len);
+	format->f_width = 1;
+	value = 0;
+	while (ft_isdigit(**s))
+	{
+		if (value < INT_MAX)
+			value = value * 10 + **s - '0';
+		*s += 1;
+	}
+	format->width = value;
 }

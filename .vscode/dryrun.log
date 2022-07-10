@@ -1,0 +1,6 @@
+make --dry-run --keep-going --print-directory
+make: Entering directory `/Users/sangkkim/42Seoul/42cursus/ft_printf'
+make: Leaving directory `/Users/sangkkim/42Seoul/42cursus/ft_printf'
+ 
+make: *** No targets specified and no makefile found.  Stop.
+

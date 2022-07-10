@@ -6,7 +6,7 @@
 /*   By: sangkkim <sangkkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 15:17:17 by sangkkim          #+#    #+#             */
-/*   Updated: 2022/07/10 21:03:39 by sangkkim         ###   ########.fr       */
+/*   Updated: 2022/07/10 23:43:26 by sangkkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,4 @@ int	put_c(unsigned char c, t_format format)
 	}
 	write(1, &c, 1);
 	return (1);
-}
-
-int	put_padding(char c, size_t len)
-{
-	int	printed;
-
-	printed = 0;
-	while (len--)
-		printed += (int)write(1, &c, 1);
-	return (printed);
 }
