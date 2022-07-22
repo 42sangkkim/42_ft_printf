@@ -6,11 +6,11 @@
 /*   By: sangkkim <sangkkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 22:54:49 by sangkkim          #+#    #+#             */
-/*   Updated: 2022/07/22 23:36:24 by sangkkim         ###   ########.fr       */
+/*   Updated: 2022/07/22 23:47:06 by sangkkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unstd.h>
+#include <unistd.h>
 #include <stdlib.h>
 #include <stdarg.h>
 
@@ -35,19 +35,19 @@ int	valid_format(char specifier)
 int	put_format(char specifier, va_list *ap)
 {
 	if (specifier == 'c')
-		return (put_c(va_arg(c, int)));
+		return (put_c(va_arg(*ap, int)));
 	if (specifier == 's')
-		return (put_s(va_arg(c, char *)));
+		return (put_s(va_arg(*ap, char *)));
 	if (specifier == 'p')
-		return (put_p(va_arg(c, void *)));
+		return (put_p(va_arg(*ap, void *)));
 	if (specifier == 'd' || specifier == 'i')
-		return (put_d(va_arg(c, int)));
+		return (put_d(va_arg(*ap, int)));
 	if (specifier == 'u')
-		return (put_u(va_arg(c, unsigned int)));
+		return (put_u(va_arg(*ap, unsigned int)));
 	if (specifier == 'x')
-		return (put_x(va_arg(c, unsigned int)));
+		return (put_x(va_arg(*ap, unsigned int)));
 	if (specifier == 'X')
-		return (put_lx(va_arg(c, unsigned int)));
+		return (put_lx(va_arg(*ap, unsigned int)));
 	if (specifier == '%')
 		return (put_c('%'));
 	return (-1);

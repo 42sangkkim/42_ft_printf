@@ -6,7 +6,7 @@
 /*   By: sangkkim <sangkkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 22:43:16 by sangkkim          #+#    #+#             */
-/*   Updated: 2022/07/22 23:23:13 by sangkkim         ###   ########.fr       */
+/*   Updated: 2022/07/22 23:46:15 by sangkkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	ft_printf(const char *format_string, ...)
 	int		printed;
 
 	va_start(ap, format_string);
+	printed = 0;
 	while (*format_string)
 	{
 		if (*format_string == '%')
